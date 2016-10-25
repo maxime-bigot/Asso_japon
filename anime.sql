@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 25 Octobre 2016 à 09:43
+-- Généré le :  Mar 25 Octobre 2016 à 16:50
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -19,23 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `anime`
 --
-
-DELIMITER $$
---
--- Procédures
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ajouter_anime` (IN `p_titre_anime` VARCHAR(100), IN `p_annee_sortie` INT, IN `p_auteur` VARCHAR(100), IN `p_synopsis` TEXT)  BEGIN
-    INSERT INTO anime(`Titre_anime`, `Annee_sortie`, `Auteur`, `Synopsis`) VALUES
-     (p_titre_anime, p_annee_sortie, p_auteur, p_synopsis);
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ajouter_genre` (IN `p_id_anime` INT, IN `p_categorie` VARCHAR(100))  BEGIN
-	SET @p0 = (SELECT genre.id_genre FROM genre WHERE genre.Nom_genre = p_categorie);
-	INSERT INTO anime_genre(anime_genre.ID_anime, anime_genre.ID_genre) VALUES
- 	  (p_id_anime, @p0);
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -204,6 +187,28 @@ INSERT INTO `membres` (`id_membre`, `pseudo`, `mail`, `mot_de_passe`) VALUES
 (3, 'loys', 'loys@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220'),
 (4, 'margaux', 'margaux@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220');
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `note_membre`
+--
+
+CREATE TABLE `note_membre` (
+  `ID_membre` int(11) NOT NULL,
+  `ID_anime` int(11) NOT NULL,
+  `note` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `note_membre`
+--
+
+INSERT INTO `note_membre` (`ID_membre`, `ID_anime`, `note`) VALUES
+(1, 7, 2),
+(2, 7, 4),
+(3, 7, 8),
+(4, 7, 10);
+
 --
 -- Index pour les tables exportées
 --
@@ -234,6 +239,15 @@ ALTER TABLE `membres`
   ADD PRIMARY KEY (`id_membre`);
 
 --
+-- Index pour la table `note_membre`
+--
+ALTER TABLE `note_membre`
+  ADD PRIMARY KEY (`ID_membre`),
+  ADD KEY `ID_membre` (`ID_membre`),
+  ADD KEY `ID_anime` (`ID_anime`),
+  ADD KEY `note` (`note`);
+
+--
 -- AUTO_INCREMENT pour les tables exportées
 --
 
@@ -262,6 +276,13 @@ ALTER TABLE `membres`
 ALTER TABLE `anime_genre`
   ADD CONSTRAINT `fk_ID_Anime` FOREIGN KEY (`ID_anime`) REFERENCES `anime` (`ID_anime`),
   ADD CONSTRAINT `fk_ID_genre` FOREIGN KEY (`ID_genre`) REFERENCES `genre` (`id_genre`);
+
+--
+-- Contraintes pour la table `note_membre`
+--
+ALTER TABLE `note_membre`
+  ADD CONSTRAINT `fk_anime_note` FOREIGN KEY (`ID_anime`) REFERENCES `anime` (`ID_anime`),
+  ADD CONSTRAINT `fk_membre_note` FOREIGN KEY (`ID_membre`) REFERENCES `membres` (`id_membre`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

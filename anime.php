@@ -41,9 +41,23 @@ else {
 
 	<h1><?= $titre ?></h1>
 	<h2><?= $annee ?></h2>
-	<h2><?= $auteur ?></h2>
+	<h2><?= $auteur ?></h2></br>
 
-	<?php
+	<!--implémenter les notes ici-->
+	<?php 
+	$notes = $bdd->prepare('SELECT * FROM note_membre WHERE ID_anime = ?');
+	$notes->execute(array($id_anime));
+
+	$nombre_notes = $notes->rowCount();
+	$notes_total = 0;
+
+	while($n = $notes->fetch()){ 
+		$notes_total += $n['note'];
+	}
+	
+	$note_final = $notes_total/$nombre_notes;
+	echo $note_final;
+
 	if(isset($erreur_genre)) {
 		echo $erreur_genre;?> <a href="modifier_genre.php?id=<?= $id_anime?>">Ajouter des catégories</a> <?php
 	}
