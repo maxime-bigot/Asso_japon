@@ -1,0 +1,65 @@
+<?php
+session_start();
+
+$bdd = new PDO("mysql:host=127.0.0.1;dbname=anime;charset=utf8", "root", "");
+
+if(isset($_GET['id']) AND !empty($_GET['id']))
+{
+	$id_anime = intval($_GET['id']);
+
+	$anime = $bdd->prepare('SELECT * FROM anime WHERE ID_anime = ?');
+	$anime->execute(array($id_anime));
+
+	if($anime->rowCount() == 1) {
+		$anime = $anime->fetch();
+		$titre = $anime['Titre_anime'];
+		$synopsis = $anime['Synopsis'];
+		$annee = $anime['Annee_sortie'];
+		$auteur = $anime['Auteur'];
+	} else {
+		die('Cet anime n\'existe pas');
+	}
+
+	$genres = $bdd->prepare('SELECT Nom_genre, genre.id_genre FROM genre INNER JOIN anime_genre ON genre.id_genre = anime_genre.ID_genre WHERE anime_genre.ID_anime = ? ORDER BY Nom_genre;');
+	$genres->execute(array($id_anime));
+
+	if($genres->rowCount() == 0) {
+		$erreur_genre = "Aucunes catégories trouvé pour cet animé";
+	}
+}
+else {
+	die('Erreur');
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Liste anime</title>
+	<meta charset="utf-8">
+</head>
+<body>
+
+	<h1><?= $titre ?></h1>
+	<h2><?= $annee ?></h2>
+	<h2><?= $auteur ?></h2>
+
+	<?php
+	if(isset($erreur_genre)) {
+		echo $erreur_genre;?> <a href="modifier_genre.php?id=<?= $id_anime?>">Ajouter des catégories</a> <?php
+	}
+	else { ?>
+	
+	<ul>
+		<?php while($g = $genres->fetch()){ ?>
+		<li><a href="genre.php?id_cat=<?= $g['id_genre']?>"><?= $g['Nom_genre'] ?></a></li>
+		<?php } ?>
+	</ul>
+	<a href="modifier_genre.php?id=<?= $id_anime?>">Modifier les catégories</a>
+
+	<?php } ?>
+
+	<p><?= $synopsis?></p></br></br>
+	<a href="index.php">Retour vers l'accueil</a>
+
+</body>
+</html>
