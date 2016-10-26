@@ -15,15 +15,12 @@ if(!isset($_SESSION['id'])) {
 		$reqanime = $bdd->prepare('SELECT ID_anime FROM anime WHERE ID_anime = ?');
 		$reqanime->execute(array($id_anime));
 
-		if($reqanime->rowCount() == 1) {
-			
-			$del_note = $bdd->prepare('DELETE FROM note_membre WHERE ID_anime = ? AND ID_membre = ?');
-			$del_note->execute(array($id_anime, $_SESSION['id']));
-
-		} else {
+		if($reqanime->rowCount() != 1) {
 			die('erreur');
 		}
-
+		$del_note = $bdd->prepare('DELETE FROM note_membre WHERE ID_anime = ? AND ID_membre = ?');
+		$del_note->execute(array($id_anime, $_SESSION['id']));
+		
 		$ins_note = $bdd->prepare('INSERT INTO note_membre (ID_membre, ID_anime, note, Description) VALUES (?, ?, ?, ?)');
 		$ins_note->execute(array($_SESSION['id'], $id_anime, $choix, $description));
 

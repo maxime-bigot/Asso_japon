@@ -43,7 +43,6 @@ else {
 	<h2><?= $annee ?></h2>
 	<h2><?= $auteur ?></h2></br>
 
-	<!--implémenter les notes ici-->
 	<?php 
 	$notes = $bdd->prepare('SELECT * FROM note_membre WHERE ID_anime = ?');
 	$notes->execute(array($id_anime));

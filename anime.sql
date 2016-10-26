@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 25 Octobre 2016 à 16:50
+-- Généré le :  Mer 26 Octobre 2016 à 09:36
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -194,20 +194,24 @@ INSERT INTO `membres` (`id_membre`, `pseudo`, `mail`, `mot_de_passe`) VALUES
 --
 
 CREATE TABLE `note_membre` (
+  `id_note` int(11) NOT NULL,
   `ID_membre` int(11) NOT NULL,
   `ID_anime` int(11) NOT NULL,
-  `note` int(11) NOT NULL
+  `note` int(11) NOT NULL,
+  `Description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `note_membre`
 --
 
-INSERT INTO `note_membre` (`ID_membre`, `ID_anime`, `note`) VALUES
-(1, 7, 2),
-(2, 7, 4),
-(3, 7, 8),
-(4, 7, 10);
+INSERT INTO `note_membre` (`id_note`, `ID_membre`, `ID_anime`, `note`, `Description`) VALUES
+(1, 1, 7, 8, ''),
+(2, 2, 7, 9, ''),
+(3, 3, 7, 8, ''),
+(4, 4, 7, 10, ''),
+(5, 1, 5, 10, ''),
+(6, 1, 8, 9, '');
 
 --
 -- Index pour les tables exportées
@@ -242,10 +246,11 @@ ALTER TABLE `membres`
 -- Index pour la table `note_membre`
 --
 ALTER TABLE `note_membre`
-  ADD PRIMARY KEY (`ID_membre`),
+  ADD PRIMARY KEY (`id_note`),
   ADD KEY `ID_membre` (`ID_membre`),
   ADD KEY `ID_anime` (`ID_anime`),
-  ADD KEY `note` (`note`);
+  ADD KEY `note` (`note`),
+  ADD KEY `id_note` (`id_note`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -266,6 +271,11 @@ ALTER TABLE `genre`
 --
 ALTER TABLE `membres`
   MODIFY `id_membre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT pour la table `note_membre`
+--
+ALTER TABLE `note_membre`
+  MODIFY `id_note` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Contraintes pour les tables exportées
 --
