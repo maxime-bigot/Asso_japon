@@ -45,7 +45,8 @@ if(isset($_POST['connexion_form'])){
 			<input type="password" placeholder="Mot de passe" name="mdpconnect">
 			<input type="submit" name="connexion_form"value="Je me connecte" />
 		</form></br></br>
-		<a href="index.php">Retour à l'accueil</a>
+		<a href="index.php">Retour à l'accueil</a></br>
+		Pas encore inscrit ? Alors allez <a href="inscription.php">ici.</a>
 		<?php if(isset($message)){ echo $message; }?>
 	</div>
 </body>

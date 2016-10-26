@@ -48,15 +48,21 @@ else {
 	$notes = $bdd->prepare('SELECT * FROM note_membre WHERE ID_anime = ?');
 	$notes->execute(array($id_anime));
 
-	$nombre_notes = $notes->rowCount();
-	$notes_total = 0;
+	if($notes->rowCount() > 0) {
+		$nombre_notes = $notes->rowCount();
+		$notes_total = 0;
 
-	while($n = $notes->fetch()){ 
-		$notes_total += $n['note'];
+		while($n = $notes->fetch()){ 
+			$notes_total += $n['note'];
+		}
+		
+		$note_final = $notes_total/$nombre_notes;
+		$note_final = round($note_final, 2);
+		echo $note_final."/<strong>10</strong> (".$nombre_notes." notes)";
+	} else {
+		echo "Aucune note pour cet anime";
 	}
 	
-	$note_final = $notes_total/$nombre_notes;
-	echo $note_final;
 
 	if(isset($erreur_genre)) {
 		echo $erreur_genre;?> <a href="modifier_genre.php?id=<?= $id_anime?>">Ajouter des catégories</a> <?php
