@@ -59,8 +59,10 @@ else {
 		$note_final = $notes_total/$nombre_notes;
 		$note_final = round($note_final, 2);
 		echo $note_final."/<strong>10</strong> (".$nombre_notes." notes)";
+		echo " <a href=\"note.php?id=".$id_anime."\">Noter cet anime</a>";
 	} else {
 		echo "Aucune note pour cet anime";
+		echo " <a href=\"note.php?id=".$id_anime."\">Noter cet anime</a>";
 	}
 	
 
