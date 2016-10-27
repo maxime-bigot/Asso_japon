@@ -6,7 +6,7 @@ if(isset($_GET['id']) AND !empty($_GET['id'])) {
 
 	$id_anime = intval($_GET['id']);
 
-	$req_note = $bdd->prepare('SELECT id_note, Note, Description, Date_note, membres.pseudo, membres.id_membre FROM note_membre INNER JOIN membres ON note_membre.ID_membre = membres.id_membre WHERE note_membre.ID_anime = ? AND Description NOT LIKE "" ORDER BY note_membre.Date_note DESC');
+	$req_note = $bdd->prepare('SELECT Note, Description, Date_note, membres.pseudo FROM note_membre INNER JOIN membres ON note_membre.ID_membre = membres.id_membre WHERE note_membre.ID_anime = ? AND Description NOT LIKE ""');
 	$req_note->execute(array($id_anime));
 	$nbr_note =  $req_note->rowCount();
 
@@ -42,9 +42,7 @@ if(isset($_GET['id']) AND !empty($_GET['id'])) {
 			</div>
 			<div class="contenu_poste">
 				<div><?= $n['Description'] ?></div>
-				<?php if(isset($_SESSION['id']) AND $n ['id_membre'] == $_SESSION['id']) { echo "<a href=\"editer_description.php?post=".$n['id_note']."\">Editer votre description</a>"; } ?>
 			</div>
-			
 		</div></br></br>
 	<?php } ?> 
 
