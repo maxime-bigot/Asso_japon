@@ -42,6 +42,7 @@ else {
 	<h1><?= $titre ?></h1>
 	<h2><?= $annee ?></h2>
 	<h2><?= $auteur ?></h2></br>
+	<a href="ajouter_note?id="></a>
 
 	<?php 
 	$notes = $bdd->prepare('SELECT * FROM note_membre WHERE ID_anime = ?');
@@ -57,11 +58,11 @@ else {
 		
 		$note_final = $notes_total/$nombre_notes;
 		$note_final = round($note_final, 2);
-		echo $note_final."/<strong>10</strong> (".$nombre_notes." notes)";
-		echo " <a href=\"note.php?id=".$id_anime."\">Noter cet anime</a>";
+		echo $note_final."/<strong>10</strong> (<a href=\"afficher_note.php?id=".$id_anime."\">".$nombre_notes." notes</a>)";
+		echo " <a href=\"note.php?id=".$id_anime."\">Noter cet anime</a></br>";
 	} else {
 		echo "Aucune note pour cet anime";
-		echo " <a href=\"note.php?id=".$id_anime."\">Noter cet anime</a>";
+		echo " <a href=\"note.php?id=".$id_anime."\">Noter cet anime</a></br>";
 	}
 	
 

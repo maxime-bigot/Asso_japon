@@ -21,7 +21,7 @@ if(!isset($_SESSION['id'])) {
 		$del_note = $bdd->prepare('DELETE FROM note_membre WHERE ID_anime = ? AND ID_membre = ?');
 		$del_note->execute(array($id_anime, $_SESSION['id']));
 		
-		$ins_note = $bdd->prepare('INSERT INTO note_membre (ID_membre, ID_anime, note, Description) VALUES (?, ?, ?, ?)');
+		$ins_note = $bdd->prepare('INSERT INTO note_membre (ID_membre, ID_anime, note, Description, Date_note) VALUES (?, ?, ?, ?, NOW())');
 		$ins_note->execute(array($_SESSION['id'], $id_anime, $choix, $description));
 
 		header("Location: ../anime.php?id=".$id_anime);
