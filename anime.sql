@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 26 Octobre 2016 à 09:36
+-- Généré le :  Ven 28 Octobre 2016 à 09:25
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -31,7 +31,7 @@ CREATE TABLE `anime` (
   `Titre_anime` varchar(100) NOT NULL,
   `Annee_sortie` int(4) NOT NULL,
   `Auteur` varchar(100) NOT NULL,
-  `Synopsis` text
+  `Synopsis` text CHARACTER SET utf8
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -43,10 +43,12 @@ INSERT INTO `anime` (`ID_anime`, `Titre_anime`, `Annee_sortie`, `Auteur`, `Synop
 (2, 'Mirai Nikki', 2011, 'ESUNO SAKAE', 'Ayant toujours préféré rester à l’écart de ses camarades, Yukitero Amano (Yuki), est un collégien qui se décrit comme étant un observateur. Il a même pris l’habitude de consigner tout ce qu’il voit dans son téléphone portable, en quelque sorte son journal intime. Il s’est également inventé un monde bien à lui, et c’est dans cet univers imaginaire qu’il a ses seuls amis : Deux Ex Machina, le dieu du Temps et de l’Espace, et Murmur, sa facétieuse servante. Mais un jour, Deus lui annonce qu’il prépare un « jeu » intéressant… Et voilà Yuki entraîné dans une cauchemardesque « course contre la mort » où chacun des participants peut voir écrit l’avenir dans son portable et doit éliminer les autres pour obtenir la place de Deus…'),
 (3, 'Sword Art Online', 2012, ' Kawahara Reki', 'En 2022, l\'humanité a réussi à créer une réalité virtuelle. Grâce à un casque, les humains peuvent se plonger entièrement dans le monde virtuel en étant comme déconnectés de la réalité, et Sword Art Online est le premier MMORPG a utiliser ce système. Mais voila que le premier jour de jeu, 10 000 personnes se retrouvent piégées dans cette réalité virtuelle par son créateur : Akihiko Kayaba. Le seul moyen d\'en sortir est de finir le jeu. Mais ce ne sera pas facile de sortir de ce monde virtuel puisque si un joueur perd la partie, il meurt également dans la vraie vie. Kirito décide alors de partir à la conquête du jeu en solo, avec pour avantage le fait de faire partie des 1 000 ex-bêta-testeurs, mais arrivera-t-il à terminer les 99 donjons et leurs boss ?'),
 (4, 'Nagi no Asukara', 2013, 'OKADA Mari', 'Nagi no Asukara raconte l\'histoire de deux collégiens : Manaka Mukaido et Hikari Sakishima. Manaka est une pleurnicheuse de première et Hikari, son ami d\'enfance, passe son temps à prendre soin d\'elle. Ils ont cependant une petite particularité : ce sont des humains vivant au fond de la mer. Eux et leurs amis, Chisaki et Kaname, s\'apprêtent désormais à intégrer le collège à la surface de la terre.'),
-(5, 'No Game No Life', 2014, 'Yuu Kamiya', 'C’est l’histoire d’une fratrie de NEET/Hikikomori (frère et soeur) qui sont des hardcores gamers indétrônables jusqu’à devenir une légende urbaine sur internet connue sous le nom de Kuuhaku. Un jour, ils sont transportés dans un monde Fantasy où la Guerre y est interdite. Tous les différents se règlent par des jeux…'),
+(5, 'No Game No Life', 2014, 'Yuu Kamiya', 'Nagi no Asukara raconte l\'histoire de deux collégiens : Manaka Mukaido et Hikari Sakishima. Manaka est une pleurnicheuse de première et Hikari, son ami d\'enfance, passe son temps à prendre soin d\'elle. Ils ont cependant une petite particularité : ce sont des humains vivant au fond de la mer. Eux et leurs amis, Chisaki et Kaname, s\'apprêtent désormais à intégrer le collège à la surface de la terre.'),
 (7, 'Akame ga Kill!', 2014, 'Takahiro &amp; Tashiro Tetsuya', 'L’histoire nous entraîne dans les aventures de Tatsumi, un jeune combattant qui se rend à la Capitale Impériale pour rejoindre l’armée. Cependant, il découvre que la ville est corrompue par la soif de pouvoir des hauts fonctionnaires qui profitent de l’inexpérience de l’Empereur pour gouverner à leur convenance. Suite à une certaine rencontre, Tatsumi se retrouve embarqué au sein d’un groupe d’assassins de l’ombre appelé Night Raid, luttant contre la tyrannie de la Cité Impériale…'),
 (8, 'One Punch Man', 2015, 'ONE', 'Saitama est un jeune homme sans emploi. Un jour, il rencontre un homme-crabe qui recherche un jeune garçon au menton en forme de fesses. Saitama finit par rencontrer ce jeune garçon et décide de le sauver de l\'homme-crabe, qu\'il arrive à battre difficilement. Dès lors, Saitama décide de devenir un super-héros et s’entraîne pendant trois ans. À la fin de son entrainement, si intense qu\'il en perd les cheveux, il remarque qu\'il est devenu tellement fort qu\'il parvient désormais à battre tous ses adversaires d\'un seul coup de poing. Sa force démesurée est pour lui source de problèmes, puisqu\'il ne trouve pas d\'adversaires à sa taille et s\'ennuie dans son métier de héros. Bien qu\'il ait mis un terme à un bon nombre de menaces toutes plus dangereuses les unes que les autres, personne ne semble remarquer l\'incroyable capacité de Saitama, à l\'exception de son ami et disciple Genos.'),
-(9, 'Golden Time', 2013, 'TAKEMIYA YUYUKO', 'L’histoire nous entraîne dans la vie quotidienne de Tada Banri, qui intègre l’université privée de Droit à Tokyo. A la rentrée, les étudiants de première année, Tada &amp; Yanagisawa Mitsuo, sont légèrement perdus. C’est ainsi qu’ils rencontrent une ravissante demoiselle tenant un bouquet de rose et qui félicite Mitsuo pour son entrée à la faculté. Tada Banri tombe immédiatement sous le charme de cette mystérieuse demoiselle. Mais il découvre que Kaga Kouko (la jeune fille), est l’amie d’enfance de Mitsuo. Ils s’étaient même promis de se marier ensemble, une fois adulte. Pour tenir sa promesse, Kouko a passé secrètement l’examen d’entrée pour l’université de Droit…');
+(9, 'Golden Time', 2013, 'TAKEMIYA YUYUKO', 'L’histoire nous entraîne dans la vie quotidienne de Tada Banri, qui intègre l’université privée de Droit à Tokyo. A la rentrée, les étudiants de première année, Tada &amp; Yanagisawa Mitsuo, sont légèrement perdus. C’est ainsi qu’ils rencontrent une ravissante demoiselle tenant un bouquet de rose et qui félicite Mitsuo pour son entrée à la faculté. Tada Banri tombe immédiatement sous le charme de cette mystérieuse demoiselle. Mais il découvre que Kaga Kouko (la jeune fille), est l’amie d’enfance de Mitsuo. Ils s’étaient même promis de se marier ensemble, une fois adulte. Pour tenir sa promesse, Kouko a passé secrètement l’examen d’entrée pour l’université de Droit…'),
+(10, 'Full Metal Alchemist : Brotherhood', 2009, 'Hiromu Arakawa', 'Dans le pays d\'Amestris, pays où l\'Alchimie est élevée au rang de science universelle, deux frères, Edward et Alphonse Elric parcourent le monde à la recherche de la légendaire pierre philosophale dans le but de retrouver leurs corps perdus. Leur père, Van Hohenheim, les a quittés il y a de cela des années, et leur mère Trisha Elric meurt quelques années plus tard d\'une maladie, laissant ses deux jeunes enfants derrière elle. Un an plus tard, les deux frères tentent de la faire revenir grâce à l\'alchimie, bravant la loi qui interdit formellement la transmutation humaine. Ils en payeront le prix fort. Edward, l\'ainé, perdra sa jambe gauche, son petit frère perd son corps tout entier. Ed sacrifiera son bras droit en scellant l\'âme de son petit frère Alphonse dans une armure. Edward décide de s\'engager dans l\'armée à l\'âge de 12 ans en tant qu\'Alchimiste d\'État, réussit l\'examen haut la main et obtient son nom d\'alchimiste, le Fullmetal Alchemist. Avec les avantages d\'alchimiste d\'état et leurs recherches, les deux frères chercheront au péril de leur vie la pierre mythique qui leur rendra ce qu\'ils ont perdu, mais le secret de la Pierre Philosophale est bien gardé.'),
+(13, 'Sakurasou no pet na kanojo', 2012, 'Kamoshida Hajime', 'Kanda Sorata est un lycéen qui vit au Sakurasō, un dortoir pour les élèves à problèmes du lycée de Sorata. Un jour, Shiina Mashiro, une superbe jeune fille et brillante artiste, arrive au Sakurasō. Sorata se dit qu\'il doit protéger Mashiro des locataires farfelus de Sakurasō, mais Mashiro a un secret surprenant : elle n\'a aucune idée de comment prendre soin d\'elle-même. Elle se perd si elle sort et sa chambre est un désordre complet. Les camarades de dortoir de Sorata le désignent alors comme le maître de Mashiro, et c\'est ainsi qu\'un garçon ordinaire et une fille brillante vont devoir vivre comme un maître et son animal de compagnie.');
 
 -- --------------------------------------------------------
 
@@ -101,7 +103,19 @@ INSERT INTO `anime_genre` (`ID_anime`, `ID_genre`) VALUES
 (3, 10),
 (3, 29),
 (3, 37),
-(3, 6);
+(3, 6),
+(10, 1),
+(10, 10),
+(10, 11),
+(10, 29),
+(10, 13),
+(10, 39),
+(10, 25),
+(13, 28),
+(13, 11),
+(13, 6),
+(13, 24),
+(13, 42);
 
 -- --------------------------------------------------------
 
@@ -198,20 +212,21 @@ CREATE TABLE `note_membre` (
   `ID_membre` int(11) NOT NULL,
   `ID_anime` int(11) NOT NULL,
   `note` int(11) NOT NULL,
-  `Description` text
+  `Description` text,
+  `Date_note` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `note_membre`
 --
 
-INSERT INTO `note_membre` (`id_note`, `ID_membre`, `ID_anime`, `note`, `Description`) VALUES
-(1, 1, 7, 8, ''),
-(2, 2, 7, 9, ''),
-(3, 3, 7, 8, ''),
-(4, 4, 7, 10, ''),
-(5, 1, 5, 10, ''),
-(6, 1, 8, 9, '');
+INSERT INTO `note_membre` (`id_note`, `ID_membre`, `ID_anime`, `note`, `Description`, `Date_note`) VALUES
+(1, 1, 7, 9, 'Très bon anime, je le recommande vraiment :)', '2016-10-27 16:10:12'),
+(2, 3, 7, 7, 'Une description !!!', '2016-10-27 16:32:32'),
+(3, 2, 7, 5, 'ouais bof...', '2016-10-27 16:32:56'),
+(4, 4, 7, 1, 'vraiment nul', '2016-10-27 16:33:18'),
+(5, 1, 1, 1, 'pas encore regardé', '2016-10-27 17:38:34'),
+(6, 3, 1, 6, '', '2016-10-27 17:38:52');
 
 --
 -- Index pour les tables exportées
@@ -260,7 +275,7 @@ ALTER TABLE `note_membre`
 -- AUTO_INCREMENT pour la table `anime`
 --
 ALTER TABLE `anime`
-  MODIFY `ID_anime` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID_anime` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT pour la table `genre`
 --
