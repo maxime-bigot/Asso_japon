@@ -3,7 +3,13 @@ session_start();
 $bdd = new PDO("mysql:host=127.0.0.1;dbname=anime;charset=utf8", "root", "");
 
 $videosParPage = 5;
-$videoTotal = $bdd->query('SELECT ID_anime FROM anime');
+if(isset($_GET['q']) AND !empty($_GET['q'])){
+	$q = htmlspecialchars($_GET['q']);
+
+	$videoTotal = $bdd->query('SELECT ID_anime FROM anime WHERE Titre_anime LIKE "%'.$q.'%"');
+} else {
+	$videoTotal = $bdd->query('SELECT ID_anime FROM anime');
+}
 $videoTotal = $videoTotal->rowCount();
 $pagesTotales = ceil($videoTotal/$videosParPage);
 
@@ -15,12 +21,10 @@ if(isset($_GET['page']) AND !empty($_GET['page']) AND $_GET['page'] > 0) {
 
 $depart = ($page-1)*$videosParPage;
 
-$animes = $bdd->query('SELECT * FROM anime ORDER BY Titre_anime LIMIT '.$depart.','.$videosParPage);
-
 if(isset($_GET['q']) AND !empty($_GET['q'])){
-	$q = htmlspecialchars($_GET['q']);
-
 	$animes = $bdd->query('SELECT * FROM anime WHERE Titre_anime LIKE "%'.$q.'%" ORDER BY Titre_anime LIMIT '.$depart.','.$videosParPage);
+} else {
+	$animes = $bdd->query('SELECT * FROM anime ORDER BY Titre_anime LIMIT '.$depart.','.$videosParPage);
 }
 
 $categories = $bdd->query('SELECT COUNT(anime_genre.ID_genre), genre.Nom_genre, genre.id_genre FROM anime_genre INNER JOIN genre ON anime_genre.ID_genre = genre.id_genre GROUP BY genre.Nom_genre, genre.id_genre');
@@ -38,6 +42,7 @@ $categories = $bdd->query('SELECT COUNT(anime_genre.ID_genre), genre.Nom_genre, 
 	<?php if(isset($_SESSION['id'])){
 		echo "<h1>".$_SESSION['pseudo']."</h1>";
 		echo "<h2><a href=\"profil.php?id_mbr=".$_SESSION['id']."\">Mon Profil</a></h2>";
+		echo "<h2><a href=\"script_php/deconnexion.php\">Se déconnecter</a></h2>";
 	} else { ?>
 	<h2><a href="inscription.php">Inscription</a></h2>
 	<h2><a href="connexion.php">Connexion</a></h2>
