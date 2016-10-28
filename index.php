@@ -45,7 +45,10 @@ $categories = $bdd->query('SELECT COUNT(anime_genre.ID_genre), genre.Nom_genre, 
 
 	<ul>
 		<?php while($a = $animes->fetch()){ ?>
-		<li><a href="anime.php?id=<?= $a['ID_anime']?>"><?= $a['Titre_anime'] ?></a></li>
+		<div class="anime" style="display: flex; align-items: center; margin: 15px;">
+			<img src="miniatures/<?= $a['ID_anime'] ?>.jpg" width="100" height="100" style="margin-right: 30px;">
+			<li><a href="anime.php?id=<?= $a['ID_anime']?>"><?= $a['Titre_anime'] ?></a></li>
+		</div>
 		<?php } ?>
 	</ul></br></br>
 	<a href="redaction.php">Ajouter un anime</a></br></br>
