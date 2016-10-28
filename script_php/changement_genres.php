@@ -14,6 +14,10 @@ foreach($_POST as $key => $val) {
 	$nom = $val;
 	$id = $key;
 
+	if(strpos($id, "_") !== false) {
+		$id = str_replace ("_", " ", $id);
+	}
+
 	if($id == $nom){
 		$recherche = $bdd->prepare('SELECT id_genre FROM genre WHERE Nom_genre = ?');
 		$recherche->execute(array($nom));
