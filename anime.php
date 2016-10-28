@@ -16,16 +16,19 @@ if(isset($_GET['id']) AND !empty($_GET['id']))
 		$synopsis = $anime['Synopsis'];
 		$annee = $anime['Annee_sortie'];
 		$auteur = $anime['Auteur'];
+
+		$genres = $bdd->prepare('SELECT Nom_genre, genre.id_genre FROM genre INNER JOIN anime_genre ON genre.id_genre = anime_genre.ID_genre WHERE anime_genre.ID_anime = ? ORDER BY Nom_genre;');
+		$genres->execute(array($id_anime));
+
+		if($genres->rowCount() == 0) {
+			$erreur_genre = "Aucunes catégories trouvé pour cet animé";
+		}
+
 	} else {
-		die('Cet anime n\'existe pas');
+		$erreur_404 = 1;
 	}
 
-	$genres = $bdd->prepare('SELECT Nom_genre, genre.id_genre FROM genre INNER JOIN anime_genre ON genre.id_genre = anime_genre.ID_genre WHERE anime_genre.ID_anime = ? ORDER BY Nom_genre;');
-	$genres->execute(array($id_anime));
-
-	if($genres->rowCount() == 0) {
-		$erreur_genre = "Aucunes catégories trouvé pour cet animé";
-	}
+	
 }
 else {
 	die('Erreur');
@@ -38,6 +41,12 @@ else {
 	<meta charset="utf-8">
 </head>
 <body>
+
+	<?php if(isset($erreur_404)) { ?>
+		<img src="images/erreur_404.png">
+		<p>Aucun anime trouvé :'(</p>
+		<a href="index.php">Accueil</a>
+	<?php } else { ?>
 
 	<h1><?= $titre ?></h1>
 	<h2><?= $annee ?></h2>
@@ -92,6 +101,9 @@ else {
 
 	<p><?= $synopsis?></p></br></br>
 	<a href="index.php">Retour vers l'accueil</a>
+
+	<?php } ?>
+
 
 </body>
 </html>

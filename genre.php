@@ -5,18 +5,23 @@ $id_genre = intval($_GET['id_cat']);
 
 $nom = $bdd->prepare('SELECT Nom_genre FROM genre WHERE ID_genre = ?');
 $nom-> execute(array($id_genre));
-$nom = $nom->fetch();
-$cat = $nom['Nom_genre'];
+if ($nom->rowCount() == 0) {
+	$erreur_404 = 1;
+} else {
+	$nom = $nom->fetch();
+	$cat = $nom['Nom_genre'];
 
-$genres = $bdd->prepare('SELECT * FROM anime INNER JOIN anime_genre ON anime.ID_anime = anime_genre.ID_anime WHERE anime_genre.ID_genre = ? ORDER BY Titre_anime');
-$genres->execute(array($id_genre));
-
-if(isset($_GET['q']) AND !empty($_GET['q'])){
-	$q = htmlspecialchars($_GET['q']);
-
-	$genres = $bdd->prepare('SELECT * FROM anime INNER JOIN anime_genre ON anime.ID_anime = anime_genre.ID_anime WHERE anime_genre.ID_genre = ? AND Titre_anime LIKE "%'.$q.'%" ORDER BY Titre_anime');
+	$genres = $bdd->prepare('SELECT * FROM anime INNER JOIN anime_genre ON anime.ID_anime = anime_genre.ID_anime WHERE anime_genre.ID_genre = ? ORDER BY Titre_anime');
 	$genres->execute(array($id_genre));
+
+	if(isset($_GET['q']) AND !empty($_GET['q'])){
+		$q = htmlspecialchars($_GET['q']);
+
+		$genres = $bdd->prepare('SELECT * FROM anime INNER JOIN anime_genre ON anime.ID_anime = anime_genre.ID_anime WHERE anime_genre.ID_genre = ? AND Titre_anime LIKE "%'.$q.'%" ORDER BY Titre_anime');
+		$genres->execute(array($id_genre));
+	}
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -26,6 +31,12 @@ if(isset($_GET['q']) AND !empty($_GET['q'])){
 	<meta charset="utf-8">
 </head>
 <body>
+
+	<?php if(isset($erreur_404)) { ?>
+		<img src="images/erreur_404.png">
+		<p>Aucun genre trouvé :'(</p>
+		<a href="index.php">Accueil</a>
+	<?php } else { ?>
 
 	<h1><?= $cat ?></h1>
 
@@ -41,7 +52,8 @@ if(isset($_GET['q']) AND !empty($_GET['q'])){
 		<?php } ?>
 	</ul></br></br>
 	<a href="index.php">Retour a l'accueil</a></br></br>
-	
+
+	<?php } ?>
 
 </body>
 </html>

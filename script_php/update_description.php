@@ -17,7 +17,7 @@ if(!isset($_SESSION['id'])) {
 		if($reqnote->rowCount() != 1) {
 			die('erreur');
 		}
-		$upd_note = $bdd->prepare('UPDATE note_membre SET Description = ? WHERE id_note = ?');
+		$upd_note = $bdd->prepare('UPDATE note_membre SET Description = ?, Date_note = NOW() WHERE id_note = ?');
 		$upd_note->execute(array($description, $id_note));
 
 		$reqanime = $bdd->prepare('SELECT ID_anime FROM note_membre WHERE id_note = ?');

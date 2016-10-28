@@ -35,7 +35,7 @@ if(isset($_GET['id']) AND !empty($_GET['id'])) {
 	while ($n = $req_note->fetch()) {?>
 		<div class="message_note">
 			<div class="info_posteur">
-				<p><?= "<strong>".$n['pseudo']."</strong>" ?> le</br><?= $n['Date_note'] ?></p>
+				<div><?= "<strong>".$n['pseudo']."</strong>" ?> le</br><?= $n['Date_note'] ?></div>
 			</div>
 			<div class="note">
 				<div><?= $n['Note'] ?></div>
